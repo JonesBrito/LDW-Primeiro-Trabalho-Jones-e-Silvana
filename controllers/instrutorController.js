@@ -1,8 +1,12 @@
 import Instrutor from "../models/Instrutor.js";
+import bcrypt from "bcryptjs";
 
 export const createInstrutor = async (req, res, next) => {
     const instrutor = new Instrutor(req.body);
     try {
+        let salt = await bcrypt.genSalt(10);
+        let hashSenha = await bcrypt.hash(instrutor.senha, salt);
+        instrutor.senha = hashSenha;
         const createInstrutor = await instrutor.save();
         res.status(201).json(createInstrutor);
     } catch (error) {
