@@ -9,6 +9,7 @@ import routeTipoExercicio from "./routes/routesTipoExercicio.js";
 import routeExercicio from "./routes/routesExercicio.js";
 import routeInstrutor from "./routes/routesInstrutor.js";
 import routeFicha from "./routes/routesFicha.js";
+import { verificarToken } from './utils/verificarToken.js';
 import { errorHandling } from "./utils/error.js";
 
 const app = express();
@@ -17,14 +18,16 @@ dotenv.config();
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(errorHandling);
-app.use("/api/alunos", routeAlunos);
-app.use("/api/exercicio", routeExercicio);
-app.use("/api/instrutores", routeInstrutor);
-app.use("/api/gruposmusculares", routeGrupoMusuculares);
-app.use("/api/tiposexercicios", routeTipoExercicio);
-app.use("/api/fichas", routeFicha);
 app.use(cookieParser());
+
 app.use("/api/auth", routeAuth);
+app.use("/api/alunos", verificarToken, routeAlunos);
+app.use("/api/instrutores", verificarToken, routeInstrutor);
+app.use("/api/fichas", verificarToken, routeFicha);
+app.use("/api/gruposmusculares", verificarToken, routeGrupoMusuculares);
+app.use("/api/tiposexercicios", verificarToken, routeTipoExercicio);
+app.use("/api/exercicio", verificarToken, routeExercicio);
+
 
 app.listen(8080, () => {
     connectDatabase();

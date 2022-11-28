@@ -1,9 +1,13 @@
 import express from "express";
 import bcrypt from "bcryptjs";
-import { login } from
-    "../controllers/authController.js";
+import { login } from "../controllers/authController.js";
+
+import { loginInstrutor } from "../controllers/authController.js";
+
 import { verificarAdmin, verificarToken, verificarUsuario } from "../utils/verificarToken.js";
+
 const router = express.Router();
+router.post('/instrutor/login', loginInstrutor);
 router.post("/login", login);
 router.get("/verificartoken", verificarToken, (req, res) => {
     res.status(200).json({ message: "Você está autenticado." });
