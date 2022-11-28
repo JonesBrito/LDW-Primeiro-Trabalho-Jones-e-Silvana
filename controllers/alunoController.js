@@ -22,6 +22,7 @@ req.body }, { new: true });
         next(error);
     }
 };
+
 export const deleteAluno = async (req, res, next) => {
     try {
         await Aluno.findByIdAndDelete(req.params.id);
@@ -30,6 +31,7 @@ export const deleteAluno = async (req, res, next) => {
         next(error);
     }
 };
+
 export const getAluno = async (req, res, next) => {
     try {
         const aluno = await Aluno.findById(req.params.id);
@@ -38,6 +40,7 @@ export const getAluno = async (req, res, next) => {
         next(error);
     }
 };
+
 export const getAlunos = async (req, res, next) => {
     try {
         const alunos = await Aluno.find();
