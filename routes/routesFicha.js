@@ -2,6 +2,7 @@ import express from "express";
 // import Aluno from "../models/AlunoModel.js";
 import { createFicha, updateFicha, deleteFicha, getFicha, getFichas } from
     "../controllers/fichaController.js";
+    
 const router = express.Router();
 
 router.post("/", createFicha);

@@ -2,6 +2,7 @@ import express from "express";
 // import Aluno from "../models/AlunoModel.js";
 import { createExercicio, updateExercicio, deleteExercicio, getExercicio, getExercicios } from
     "../controllers/exercicioController.js";
+    
 const router = express.Router();
 
 router.post("/", createExercicio);
